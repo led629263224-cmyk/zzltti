@@ -270,3 +270,27 @@ function initThemeToggle() {
 window.onload = () => {
     initThemeToggle();
 };
+// ==========================================
+// 基础安全防护：防止普通用户打开控制台
+// ==========================================
+
+// 1. 禁用鼠标右键菜单
+document.addEventListener('contextmenu', function (e) { 
+    e.preventDefault(); 
+});
+
+// 2. 禁用 F12 及各类开发者工具快捷键
+document.addEventListener('keydown', function (e) {
+    // 禁用 F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+    }
+    // 禁用 Ctrl+Shift+I (打开控制台) / Ctrl+Shift+J / Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'C' || e.key === 'c' || e.key === 'J' || e.key === 'j')) {
+        e.preventDefault();
+    }
+    // 禁用 Ctrl+U (查看网页源代码)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+        e.preventDefault();
+    }
+});
