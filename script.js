@@ -29,7 +29,7 @@ const groundQuizData = [
     { type: "choice", q: "第三部分 Q25. 你是最后一个存活的队员，敌方还有三人，你会？", options: [ { text: "A. 找个角落蹲着，保底维修费和kd", targets: ["轮椅者", "性能者"] }, { text: "B. 主动出击，尝试逐个击破", targets: ["裸奔者", "绕侧者"] }, { text: "C. 上飞机/防空车，看能不能翻盘", targets: ["CAS者", "防空者"] }, { text: "D. 无所谓，死了下一局", targets: ["赤石者"] } ] },
     { type: "choice", q: "第三部分 Q26. 你正在绕侧，途中看到队友和敌人交火，你会？", options: [ { text: "A. 停下来帮队友打掉敌人", targets: ["防空者", "性能者"] }, { text: "B. 继续绕侧，我的目标是敌方重生点", targets: ["绕侧者"] }, { text: "C. 看情况，能稳收人头就帮，有风险就走", targets: ["CAS者", "裸奔者"] } ] },
     { type: "choice", q: "第三部分 Q27. 一局游戏里，你起制空飞机后发现对面没有飞机了，你会？", options: [ { text: "A. j3换地面载具", targets: ["性能者"] }, { text: "B. 古法舔地，来都来了", targets: ["CAS者"] }, { text: "C. 巡航等对面起飞机", targets: ["制空者"] }, { text: "D. 找对面防空车决战", targets: ["裸奔者", "防空者"] } ] },
-    { type: "choice", q: "第三部分 Q28. 你对“白给”的定义是？", options: [ { text: "A. 没有造成任何伤害就死了", targets: ["性能者"] }, { text: "B. 没有达成战术目标就死了（如没能绕到位）", targets: ["绕侧者"] }, { text: "C. 死得很憋屈（如被一发送走）", targets: ["轮椅者"] }, { text: "D. 我玩MSC，每局都是白给，习惯了", targets: ["赤石者"] } ] }
+    { type: "choice", q: "第三部分 Q28. 你对“白给”的定义是？", options: [ { text: "A. 没有造成任何伤害就死了", targets: ["性能者"] }, { text: "B. 没有达成战术目标就死了（如没能绕到位）", targets: ["绕侧者"] }, { text: "C. 死得很憋屈（如被一发送走）", targets: ["轮椅者"] }, { text: "D. 我玩弱势载具，每局都是白给，习惯了", targets: ["赤石者"] } ] }
 ];
 
 const groundResults = {
