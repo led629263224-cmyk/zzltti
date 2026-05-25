@@ -118,6 +118,26 @@ function startQuiz(type) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function returnToSelection() {
+    currentQuizData = [];
+    currentResults = {};
+    userAnswers = [];
+
+    document.getElementById('quiz-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('mode-selection').style.display = 'grid';
+    document.getElementById('questions-list').innerHTML = '';
+    document.getElementById('error-msg').classList.remove('show');
+
+    const progressFill = document.getElementById('progress-fill');
+    if (progressFill) progressFill.style.width = '0%';
+
+    const counter = document.getElementById('question-counter');
+    if (counter) counter.innerText = '当前进度 : 0 / 28';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function renderAllQuestions() {
     const listContainer = document.getElementById('questions-list');
     listContainer.innerHTML = '';

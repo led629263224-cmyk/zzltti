@@ -35,10 +35,17 @@
     </div>
 
     <div id="quiz-screen" style="display: none;">
+        <div class="quiz-toolbar">
+            <button type="button" class="back-btn" onclick="returnToSelection()" aria-label="返回选择界面">
+                <span aria-hidden="true">←</span>
+                返回选择
+            </button>
+            <div class="quiz-eyebrow">WTTI ASSESSMENT</div>
+        </div>
         <div class="progress-container">
             <div class="progress-bar" id="progress-fill"></div>
         </div>
-        <div style="text-align: right; margin-top: -20px; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted);" id="question-counter">当前进度 : 0 / 28</div>
+        <div class="question-counter" id="question-counter">当前进度 : 0 / 28</div>
 
         <div id="questions-list">
             </div>
