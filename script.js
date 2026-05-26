@@ -338,11 +338,6 @@ function initInteractiveGrid() {
             setTarget(event.clientX, event.clientY);
         }
     }, { passive: true });
-    window.addEventListener('touchmove', (event) => {
-        const touch = event.touches[0];
-        if (touch) setTarget(touch.clientX, touch.clientY);
-    }, { passive: true });
-
     renderGrid();
 }
 

@@ -637,19 +637,22 @@ body {
 
     .grid-layer-primary {
         background-size: 38px 38px, 38px 38px, 152px 152px, 152px 152px;
+        background-position: 0 0, 0 0, 0 0, 0 0;
         opacity: 0.66;
-        transform: translate3d(calc(var(--grid-shift-x) * 0.18), calc(var(--grid-shift-y) * 0.18), 0);
+        transform: none;
     }
 
     .grid-layer-depth {
         background-size: 88px 88px;
+        background-position: 0 0, 0 0;
         opacity: 0.26;
+        transform: none;
     }
 
     .grid-glow {
         background:
-            radial-gradient(circle at var(--grid-x) var(--grid-y), var(--grid-glow), transparent 17rem),
-            radial-gradient(circle at calc(100% - var(--grid-x)) calc(100% - var(--grid-y)), rgba(216, 180, 106, 0.1), transparent 14rem);
+            radial-gradient(circle at 50% 28%, var(--grid-glow), transparent 17rem),
+            radial-gradient(circle at 78% 72%, rgba(216, 180, 106, 0.1), transparent 14rem);
     }
 
     .header {
