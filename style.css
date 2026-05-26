@@ -16,6 +16,15 @@
     --error-color: #ff6b6b;
     --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
     --soft-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    --grid-line: rgba(122, 185, 205, 0.18);
+    --grid-line-strong: rgba(216, 180, 106, 0.18);
+    --grid-glow: rgba(99, 212, 255, 0.22);
+    --grid-x: 50vw;
+    --grid-y: 34vh;
+    --grid-shift-x: 0px;
+    --grid-shift-y: 0px;
+    --grid-tilt-x: 0deg;
+    --grid-tilt-y: 0deg;
 }
 
 [data-theme="light"] {
@@ -36,6 +45,9 @@
     --error-color: #d72f3f;
     --shadow: 0 24px 70px rgba(21, 31, 44, 0.13);
     --soft-shadow: 0 14px 34px rgba(21, 31, 44, 0.12);
+    --grid-line: rgba(15, 93, 120, 0.14);
+    --grid-line-strong: rgba(154, 106, 30, 0.16);
+    --grid-glow: rgba(15, 141, 183, 0.18);
 }
 
 * {
@@ -46,11 +58,8 @@
 
 body {
     min-height: 100vh;
-    background:
-        linear-gradient(135deg, rgba(99, 212, 255, 0.08), transparent 34%),
-        linear-gradient(315deg, rgba(216, 180, 106, 0.12), transparent 32%),
-        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 96px),
-        linear-gradient(180deg, #070a0f 0%, var(--bg-color) 46%, #0d1118 100%);
+    overflow-x: hidden;
+    background: linear-gradient(180deg, #070a0f 0%, var(--bg-color) 46%, #0d1118 100%);
     color: var(--text-main);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     line-height: 1.65;
@@ -59,14 +68,76 @@ body {
 }
 
 [data-theme="light"] body {
+    background: linear-gradient(180deg, #f7f8fa 0%, var(--bg-color) 100%);
+}
+
+.interactive-grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    perspective: 900px;
+    background:
+        linear-gradient(135deg, rgba(99, 212, 255, 0.07), transparent 34%),
+        linear-gradient(315deg, rgba(216, 180, 106, 0.11), transparent 36%);
+}
+
+[data-theme="light"] .interactive-grid-bg {
     background:
         linear-gradient(135deg, rgba(15, 141, 183, 0.08), transparent 34%),
-        linear-gradient(315deg, rgba(154, 106, 30, 0.1), transparent 32%),
-        repeating-linear-gradient(90deg, rgba(16, 23, 34, 0.035) 0 1px, transparent 1px 96px),
-        linear-gradient(180deg, #f7f8fa 0%, var(--bg-color) 100%);
+        linear-gradient(315deg, rgba(154, 106, 30, 0.08), transparent 36%);
+}
+
+.grid-layer,
+.grid-glow {
+    position: absolute;
+    inset: -18vmax;
+    will-change: transform, opacity, background-position;
+}
+
+.grid-layer-primary {
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(var(--grid-line-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px);
+    background-size: 48px 48px, 48px 48px, 192px 192px, 192px 192px;
+    background-position:
+        var(--grid-shift-x) var(--grid-shift-y),
+        var(--grid-shift-x) var(--grid-shift-y),
+        calc(var(--grid-shift-x) * -0.45) calc(var(--grid-shift-y) * -0.45),
+        calc(var(--grid-shift-x) * -0.45) calc(var(--grid-shift-y) * -0.45);
+    opacity: 0.78;
+    transform: rotateX(var(--grid-tilt-x)) rotateY(var(--grid-tilt-y)) translate3d(calc(var(--grid-shift-x) * 0.35), calc(var(--grid-shift-y) * 0.35), 0);
+    transform-origin: center;
+    mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 78%, transparent 100%);
+}
+
+.grid-layer-depth {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 112px 112px;
+    background-position:
+        calc(var(--grid-shift-x) * -0.8) calc(var(--grid-shift-y) * -0.8),
+        calc(var(--grid-shift-x) * -0.8) calc(var(--grid-shift-y) * -0.8);
+    opacity: 0.36;
+    transform: rotateX(calc(var(--grid-tilt-x) * -0.7)) rotateY(calc(var(--grid-tilt-y) * -0.7)) scale(1.04);
+}
+
+.grid-glow {
+    inset: 0;
+    background:
+        radial-gradient(circle at var(--grid-x) var(--grid-y), var(--grid-glow), transparent 23rem),
+        radial-gradient(circle at calc(100% - var(--grid-x)) calc(100% - var(--grid-y)), rgba(216, 180, 106, 0.12), transparent 19rem);
+    opacity: 0.9;
+    transition: opacity 0.25s ease;
 }
 
 .container {
+    position: relative;
+    z-index: 1;
     width: min(100%, 900px);
     margin: 0 auto;
     padding: 0 22px;
@@ -517,6 +588,8 @@ body {
 }
 
 .site-footer {
+    position: relative;
+    z-index: 1;
     max-width: 900px;
     margin: 42px auto 0;
     border-top: 1px solid var(--border-color);
@@ -551,6 +624,32 @@ body {
         right: 14px;
         width: 42px;
         height: 42px;
+    }
+
+    .interactive-grid-bg {
+        perspective: 620px;
+    }
+
+    .grid-layer,
+    .grid-glow {
+        inset: -24vmax;
+    }
+
+    .grid-layer-primary {
+        background-size: 38px 38px, 38px 38px, 152px 152px, 152px 152px;
+        opacity: 0.66;
+        transform: translate3d(calc(var(--grid-shift-x) * 0.18), calc(var(--grid-shift-y) * 0.18), 0);
+    }
+
+    .grid-layer-depth {
+        background-size: 88px 88px;
+        opacity: 0.26;
+    }
+
+    .grid-glow {
+        background:
+            radial-gradient(circle at var(--grid-x) var(--grid-y), var(--grid-glow), transparent 17rem),
+            radial-gradient(circle at calc(100% - var(--grid-x)) calc(100% - var(--grid-y)), rgba(216, 180, 106, 0.1), transparent 14rem);
     }
 
     .header {
@@ -603,5 +702,12 @@ body {
 
     .result-image-container {
         max-height: 230px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grid-layer-primary,
+    .grid-layer-depth {
+        transform: none;
     }
 }

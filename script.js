@@ -287,8 +287,68 @@ function initThemeToggle() {
     });
 }
 
+function initInteractiveGrid() {
+    const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let targetX = width * 0.5;
+    let targetY = height * 0.34;
+    let currentX = targetX;
+    let currentY = targetY;
+    let rafId = null;
+
+    const updateSize = () => {
+        width = window.innerWidth || 1;
+        height = window.innerHeight || 1;
+    };
+
+    const setTarget = (clientX, clientY) => {
+        targetX = Math.max(0, Math.min(width, clientX));
+        targetY = Math.max(0, Math.min(height, clientY));
+        if (!rafId) rafId = requestAnimationFrame(renderGrid);
+    };
+
+    const renderGrid = () => {
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+
+        const centeredX = (currentX / width) - 0.5;
+        const centeredY = (currentY / height) - 0.5;
+
+        root.style.setProperty('--grid-x', `${currentX}px`);
+        root.style.setProperty('--grid-y', `${currentY}px`);
+        root.style.setProperty('--grid-shift-x', `${centeredX * 34}px`);
+        root.style.setProperty('--grid-shift-y', `${centeredY * 28}px`);
+        root.style.setProperty('--grid-tilt-x', `${centeredY * -3.2}deg`);
+        root.style.setProperty('--grid-tilt-y', `${centeredX * 3.8}deg`);
+
+        if (Math.abs(targetX - currentX) > 0.2 || Math.abs(targetY - currentY) > 0.2) {
+            rafId = requestAnimationFrame(renderGrid);
+        } else {
+            rafId = null;
+        }
+    };
+
+    window.addEventListener('resize', updateSize, { passive: true });
+    window.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+            setTarget(event.clientX, event.clientY);
+        }
+    }, { passive: true });
+    window.addEventListener('touchmove', (event) => {
+        const touch = event.touches[0];
+        if (touch) setTarget(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    renderGrid();
+}
+
 window.onload = () => {
     initThemeToggle();
+    initInteractiveGrid();
 };
 // ==========================================
 // 基础安全防护：防止普通用户打开控制台
