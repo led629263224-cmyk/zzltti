@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>阜南快跑</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="game-shell">
+        <a class="home-link" href="../../">返回首页</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="切换暗色模式">暗色</button>
+        <div class="play-area">
+            <aside class="rules-panel" aria-label="游戏规则">
+                <h2>游戏规则</h2>
+                <ul>
+                    <li>你现在是金币f/a-18，你必须要在不死鸟大抽奖之下活下去，到达战区，美美得吃。。。吗？</li>
+                    <li>炸战区获得研发点，每个战区100研发。</li>
+                    <li>一路上躲不死鸟，被命中会被击落。</li>
+                    <li>研发点到 2000 后进入 Boss 战。</li>
+                    <li>Boss 战中用机炮攻击邪恶 bvvd。</li>
+                    <li>电脑 A / D 移动，鼠标左键攻击。</li>
+                    <li>小心 bvvd 的糖衣炮弹！！</li>
+                </ul>
+            </aside>
+            <section class="game-board" aria-label="阜南快跑">
+                <div class="hud">
+                    <div class="stat-bar">
+                        <div class="stat-row">
+                            <span>研发点 Research</span>
+                            <strong><span id="score" class="score-value">0</span></strong>
+                        </div>
+                        <div class="meter" aria-hidden="true">
+                            <div id="progressFill" class="meter-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-container">
+                    <canvas id="gameCanvas"></canvas>
+                    <div class="mobile-controls" aria-label="手机移动控制">
+                        <div class="move-controls">
+                            <button id="leftBtn" class="control-btn" type="button" aria-label="向左移动">‹</button>
+                            <button id="rightBtn" class="control-btn" type="button" aria-label="向右移动">›</button>
+                        </div>
+                        <button id="shootBtn" class="control-btn shoot-btn" type="button" aria-label="发射机炮">●</button>
+                    </div>
+                    <button id="restartBtn" class="restart-btn" type="button">重新开始</button>
+                    <div id="startOverlay" class="start-overlay">
+                        <div class="start-panel">
+                            <h1>阜南快跑</h1>
+                            <button id="startBtn" class="start-btn" type="button">开始游戏</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="history-panel" aria-label="历史战绩">
+                <div class="history-header">
+                    <span>历史战绩</span>
+                    <strong id="bestScore">0</strong>
+                </div>
+                <ol id="historyList" class="history-list"></ol>
+                <button id="resetHistoryBtn" class="history-reset-btn" type="button">重置历史数据</button>
+            </aside>
+        </div>
+        <footer class="game-footer">
+            本游戏仅供娱乐，最终解释权归作者所有。感谢 ZBob_大将 的抠图工作 © 2026
+        </footer>
+    </main>
+
+    <div class="preload-assets">
+        <img id="playerImg" src="assets/playerImg.png" alt="角色">
+        <img id="bgImg" src="assets/bgImg.png" alt="背景">
+        <img id="obstacleImg" src="assets/obstacleImg.png" alt="不死鸟">
+        <img id="buffImg" src="assets/buffImg.png" alt="战区">
+        <img id="buffEatenImg" src="assets/buffEatenImg.png" alt="已炸战区">
+        <img id="announcementImg" src="assets/摧毁基地1.png" alt="播报图">
+        <img id="bossImg" src="assets/bvvd.png" alt="Boss">
+        <img id="bullet500Img" src="assets/500.png" alt="500弹幕">
+        <img id="bulletStarImg" src="assets/star.png" alt="星星弹幕">
+    </div>
+
+    <script src="game.js?v=boss-demo-5"></script>
+</body>
+</html>

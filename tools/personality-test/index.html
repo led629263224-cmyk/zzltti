@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战雷人格定位测试 - WTTI</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="style.css?v=2.0">
+</head>
+<body>
+
+<div class="interactive-grid-bg" aria-hidden="true">
+    <div class="grid-layer grid-layer-primary"></div>
+    <div class="grid-layer grid-layer-depth"></div>
+    <div class="grid-glow"></div>
+</div>
+
+<a class="home-link" href="../../">返回首页</a>
+
+<button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+    <span class="icon">🌓</span>
+</button>
+
+<div class="container">
+    <div class="header">
+        <h1 class="title">战雷人格分析系统</h1>
+        <p class="subtitle">请选择你要进行评估的类型，并根据真实游戏习惯作答。</p>
+    </div>
+
+    <div id="mode-selection" class="mode-selection-container">
+        <div class="mode-card" onclick="startQuiz('ground')">
+            <div class="mode-icon">🪖</div>
+            <h2>陆战测试</h2>
+            <p>测测你在钢铁洪流中的灵魂归宿</p>
+        </div>
+        <div class="mode-card" onclick="startQuiz('air')">
+            <div class="mode-icon">✈️</div>
+            <h2>空战测试</h2>
+            <p>测测你在碧空万里时的战术信仰</p>
+        </div>
+    </div>
+
+    <div id="quiz-screen" style="display: none;">
+        <div class="quiz-toolbar">
+            <button type="button" class="back-btn" onclick="returnToSelection()" aria-label="返回选择界面">
+                <span aria-hidden="true">←</span>
+                返回选择
+            </button>
+            <div class="quiz-eyebrow">WTTI ASSESSMENT</div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-fill"></div>
+        </div>
+        <div class="question-counter" id="question-counter">当前进度 : 0 / 28</div>
+
+        <div id="questions-list">
+            </div>
+        
+        <div class="submit-container">
+            <button id="submit-btn" class="action-btn primary-btn" onclick="submitQuiz()">
+                提交查看人格分析
+            </button>
+            <p id="error-msg" class="error-msg">还有题目未完成，请检查👆</p>
+        </div>
+    </div>
+
+    <div id="result-screen" style="display: none;">
+        <div class="result-card">
+            <div class="result-badge">分析报告生成完毕</div>
+            <div class="result-image-container">
+                <img src="" alt="战雷人格图" id="result-image">
+            </div>
+            <h1 class="result-title" id="final-personality"></h1>
+            <div class="result-desc" id="final-desc"></div>
+            <button class="action-btn secondary-btn" onclick="location.reload()">返回主界面</button>
+        </div>
+    </div>
+</div>
+</div> <div class="site-footer">
+    <p>本测试纯属娱乐,测试结果与最终解释权归作者所有,感谢ZBob_大将的抠图工作 &copy; 2026</p>
+</div>
+
+<script src="script.js?v=2.0"></script>
+</body>
+</html>
